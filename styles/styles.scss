@@ -2,11 +2,11 @@
 
 .root {
   display: flex;
+  min-height: 100vh;
 }
 
 .left-grid {
   background-color: $dark-background-secondary;
-  min-height: 100vh;
   padding: 96px;
   box-sizing: border-box;
 }
@@ -14,7 +14,6 @@
 .right-grid {
   background-color: $dark-background-primary;
   flex-grow: 1;
-  min-height: 100vh;
   padding: 96px;
   box-sizing: border-box;
 }
@@ -29,10 +28,10 @@
 }
 
 .c-logo-text {
+  font-family: 'Raleway', sans-serif;
   color: white;
   font-weight: 700;
   font-size: 16px;
-  font-family: 'Raleway', sans-serif;
   vertical-align: middle;
 }
 
@@ -78,6 +77,10 @@
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
+  cursor: pointer;
+  &:hover {
+    background-color: $dark-background-secondary;
+  }
 }
 
 .tab-btn-active {
@@ -86,6 +89,10 @@
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
+  cursor: default;
+  &:hover {
+    background: none;
+  }
   &:after {
     content: '';
     position: absolute;
@@ -153,4 +160,37 @@
     border: 1px solid $dark-basic-thriary;
     color: $dark-basic-primary;
   }
+}
+
+.form-sub {
+  color: $dark-basic-secondary;
+  font-family: $poppins;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.input-select {
+  width: 100%;
+  padding: 8px 16px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #52526B;
+  color: $dark-basic-primary;
+  font-family: $roboto;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.term-link-container {
+  display: flex;
+  align-items: center;
+}
+
+.term-link {
+  color: $dark-accent-primary;
+  font-family: $roboto;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
 }
