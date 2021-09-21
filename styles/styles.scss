@@ -332,3 +332,16 @@
   font-size: 16px;
   line-height: 22px;
 }
+
+.gallery-card-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-column-gap: 32px;
+}
+
+.gallery-card {
+  // width: 166px;
+  height: 260px;
+  background-color: #5C7AE5;
+  border-radius: 6px;
+}
