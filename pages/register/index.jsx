@@ -49,7 +49,7 @@ export default function Login() {
               <input className="input-text" type="password" name="password" />
             </div>
           </div>
-          <div className="term-link-container my-4 py-2">
+          <div className="form-link-container my-4 py-2">
             <img
               src="/cloud-download.png"
               alt="cloud download"
@@ -57,7 +57,7 @@ export default function Login() {
               height="16"
               className="mr-2"
             />
-            <p className="term-link">Terms and conditions</p>
+            <p className="form-link">Terms and conditions</p>
           </div>
           <div className="btn-form-container">
             <button type="reset" className="btn btn-outlined mr-3">
