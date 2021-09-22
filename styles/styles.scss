@@ -3,16 +3,33 @@
 .root {
   display: flex;
   min-height: 100vh;
+  max-width: 1400px;
+  width: 100%;
+  margin: auto !important;
+}
+
+.ccontainer {
+  display: flex;
+}
+
+.left-outer, .right-outer {
+  flex: 1;
+}
+
+.left-outer, .left-grid {
+  background-color: $dark-background-secondary;
+}
+
+.right-outer, .right-grid {
+  background-color: $dark-background-primary;
 }
 
 .left-grid {
-  background-color: $dark-background-secondary;
   padding: 96px;
   box-sizing: border-box;
 }
 
 .right-grid {
-  background-color: $dark-background-primary;
   flex-grow: 1;
   padding: 96px;
   box-sizing: border-box;
