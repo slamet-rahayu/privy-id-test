@@ -6,9 +6,6 @@ function getUser() {
   return null;
 }
 
-function setUser(data) {
-  localStorage.setItem('user', JSON.stringify(data));
-  return 'success';
-}
+const userServices = { getUser };
 
-export default { getUser, setUser };
+export default userServices;

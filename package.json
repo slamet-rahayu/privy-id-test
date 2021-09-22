@@ -2,21 +2,31 @@
   "name": "privy-id-test",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://pretest-qa.dcidev.id",
   "scripts": {
-    "dev": "next dev",
+    "dev": "node server",
     "build": "next build",
-    "start": "next start",
+    "start": "cross-env NODE_ENV=production node server",
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.8.1",
     "axios": "^0.21.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "font-awesome": "^4.7.0",
+    "http-proxy-middleware": "^2.0.1",
     "next": "11.1.2",
+    "next-connect": "^0.10.2",
     "prop-types": "^15.7.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "sass": "^1.41.1"
+    "react-hook-form": "^7.15.4",
+    "sass": "^1.41.1",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-next": "11.1.2",

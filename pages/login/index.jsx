@@ -1,8 +1,11 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import Tab from '../../components/tab';
+import useLogin from '../../hooks/login';
 
 export default function Login() {
   const date = new Date().toISOString();
+  const { register, errors, submit } = useLogin();
   return (
     <div className="ccontainer">
       <div className="left-outer" />
@@ -29,16 +32,29 @@ export default function Login() {
         <div className="right-grid">
           <p className="right-grid-date mb-5">Today {date}</p>
           <Tab />
-          <form>
+          <form onSubmit={submit}>
             <div className="form-container mt-5">
               <h3 className="form-heading mb-4 pb-3">Login Account</h3>
               <div className="form-group mb-4">
                 <div className="input-label mb-2">Phone Number</div>
-                <input className="input-text" type="text" name="phone" />
+                <input
+                  className="input-text"
+                  type="text"
+                  name="phone"
+                  {...register('phone')}
+                />
+                {errors.phone && (
+                  <p style={{ color: 'red' }}>{errors.phone.message}</p>
+                )}
               </div>
               <div className="form-group">
                 <div className="input-label mb-2">Password</div>
-                <input className="input-text" type="password" name="password" />
+                <input
+                  className="input-text"
+                  type="password"
+                  name="password"
+                  {...register('password')}
+                />
               </div>
             </div>
             <div className="btn-form-container mt-5 pt-5">

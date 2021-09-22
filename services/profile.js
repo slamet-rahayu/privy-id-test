@@ -45,4 +45,6 @@ async function education(param) {
   }
 }
 
-export default { update, getProfile, career, education };
+const profileServices = { update, getProfile, career, education };
+
+export default profileServices;

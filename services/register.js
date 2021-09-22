@@ -42,4 +42,6 @@ async function remove(phone = '') {
   }
 }
 
-export default { register, otpMatch, otpRequest, remove };
+const registerService = { register, otpMatch, otpRequest, remove };
+
+export default registerService;

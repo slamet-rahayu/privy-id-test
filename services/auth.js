@@ -8,6 +8,9 @@ async function login(phone = '', password = '') {
     const { data } = await axios.post(`${baseApi}/sign_in`, {
       phone,
       password,
+      latlong: 0,
+      device_token: 0,
+      device_type: 2,
     });
     return data;
   } catch (error) {
@@ -35,4 +38,6 @@ async function revoke(token) {
   }
 }
 
-export default { login, credentials, revoke };
+const authServices = { login, credentials, revoke };
+
+export default authServices;

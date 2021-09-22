@@ -51,9 +51,11 @@ async function deleteProfilePic(id) {
   }
 }
 
-export default {
+const uploadService = {
   uploadCover,
   setProfilePic,
   uploadProfilePic,
   deleteProfilePic,
 };
+
+export default uploadService;

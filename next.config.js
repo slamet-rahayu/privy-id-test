@@ -6,6 +6,9 @@ module.exports = {
     ignoreDuringBuilds: true,
   },
   publicRuntimeConfig: {
+    apiUrl: '/api/api/v1',
+  },
+  serverRuntimeConfig: {
     apiUrl: 'http://pretest-qa.dcidev.id/api/v1',
   },
 };
