@@ -1,7 +1,7 @@
 import React from 'react';
 import Tab from '../../../components/tab';
 
-export default function Login() {
+export default function InfromationForm() {
   return (
     <div className="ccontainer">
       <div className="left-outer" />
