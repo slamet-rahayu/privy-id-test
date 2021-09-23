@@ -264,26 +264,35 @@
   line-height: 24px;
 }
 
-.alert-warning {
+.alert {
   padding: 18px;
   background-color: $dark-background-thriary;
   display: flex;
   align-items: center;
   border-radius: 8px;
-}
-
-.alert-text {
-  color: $dark-basic-primary;
-  font-family: $poppins;
-  font-size: 13px;
-  line-height: 18px;
-  flex-grow: 1;
-}
-
-.alert-btn-close {
-  background: none;
-  border: none;
-  padding: 0;
+  &-text {
+    color: $dark-basic-primary;
+    font-family: $poppins;
+    font-size: 13px;
+    line-height: 18px;
+    flex-grow: 1;
+  }
+  &-icon {
+    &-warning {
+      color: $color-info;
+    }
+    &-error {
+      color: $color-danger;
+    }
+    &-success {
+      color: $color-success;
+    }
+  }
+  &-btn-close {
+    background: none;
+    border: none;
+    padding: 0;
+  }
 }
 
 .form-otp {

@@ -3,7 +3,9 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import 'font-awesome/css/font-awesome.min.css';
 import userServices from '../services/user';
+import alertContext from '../context/alert';
 import '../styles/bootstrap.min.css';
 import '../styles/globals.css';
 import '../styles/reset.css';
@@ -17,16 +19,19 @@ function MyApp({ Component, pageProps }) {
     const user = userServices.getUser();
     if (!user && !publicPath.includes(path)) {
       router.replace('/login');
-    } else {
+    } else if (user && publicPath.includes(path)) {
       router.replace('/information/form');
     }
   }, []);
+  const { AlertProvider } = alertContext;
   return (
     <>
       <Head>
         <title>Privy.id Test</title>
       </Head>
-      <Component {...pageProps} />
+      <AlertProvider>
+        <Component {...pageProps} />
+      </AlertProvider>
     </>
   );
 }

@@ -2,10 +2,11 @@
 import React from 'react';
 import Tab from '../../components/tab';
 import useLogin from '../../hooks/login';
+import Alert from '../../components/alert';
 
 export default function Login() {
   const date = new Date().toISOString();
-  const { register, errors, submit } = useLogin();
+  const { register, errors, submit, isLoading } = useLogin();
   return (
     <div className="ccontainer">
       <div className="left-outer" />
@@ -27,6 +28,7 @@ export default function Login() {
               is a secure platform that makes it easy to buy, sell, and store
               cryptocurrency like Bitcoin, Ethereum, and more. Based in the USA
             </p>
+            <Alert />
           </div>
         </div>
         <div className="right-grid">
@@ -62,7 +64,7 @@ export default function Login() {
                 Reset
               </button>
               <button type="submit" className="btn">
-                Login
+                Login {isLoading && <i className="fa fa-spin fa-spinner" />}
               </button>
             </div>
           </form>
