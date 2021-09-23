@@ -37,11 +37,13 @@ function useLogin() {
       if (error.message.includes('422')) {
         showAlert({
           alertType: 'error',
+          autoHide: true,
           alertMessage: 'Incorrect username or password!',
         });
       } else {
         showAlert({
           alertType: 'error',
+          autoHide: true,
           alertMessage: 'Internal Server Error!',
         });
       }

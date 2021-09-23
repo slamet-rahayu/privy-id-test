@@ -3,7 +3,7 @@ import alertContext from '../../context/alert';
 
 export default function Alert() {
   const [icon, setIcon] = useState('');
-  const { visible, type, message } = useContext(alertContext.AlertContext);
+  const { visible, type, message, hideAlert } = useContext(alertContext.AlertContext);
 
   useEffect(() => {
     switch (type) {
@@ -30,7 +30,7 @@ export default function Alert() {
     <div className="alert mt-3">
       <i className={`fa fa-${icon} mr-2 alert-icon-${type}`} />
       <p className="alert-text">{message}</p>
-      <button type="button" className="alert-btn-close">
+      <button type="button" className="alert-btn-close" onClick={hideAlert}>
         <img src="/times.png" alt="times" width="14" height="14" />
       </button>
     </div>
