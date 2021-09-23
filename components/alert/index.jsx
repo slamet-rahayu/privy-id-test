@@ -3,7 +3,9 @@ import alertContext from '../../context/alert';
 
 export default function Alert() {
   const [icon, setIcon] = useState('');
-  const { visible, type, message, hideAlert } = useContext(alertContext.AlertContext);
+  const { visible, type, message, hideAlert } = useContext(
+    alertContext.AlertContext
+  );
 
   useEffect(() => {
     switch (type) {

@@ -1,15 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Link from 'next/link';
 
-export default function Tab({ routes }) {
+export default function Tab({ routes, active }) {
   return (
     <div className="tab-container">
-      <Link href="/login">
-        <div className="tab-btn p-2 mr-4">Login</div>
-      </Link>
-      <Link href="/register">
-        <div className="tab-btn tab-btn-active p-2">Registration</div>
-      </Link>
+      {routes.map((v) => {
+        return (
+          <Link href={v.route}>
+            <div
+              className={`tab-btn ${
+                v.route === active ? 'tab-btn-active' : ''
+              } p-2 mr-4`}
+            >
+              {v.name}
+            </div>
+          </Link>
+        );
+      })}
     </div>
   );
 }
+
+Tab.propTypes = {
+  routes: PropTypes.instanceOf(Array).isRequired,
+  active: PropTypes.bool.isRequired,
+};

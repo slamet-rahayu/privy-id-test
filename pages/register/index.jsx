@@ -1,8 +1,11 @@
 import React from 'react';
+import { useRouter } from 'next/router';
+import tablink from '../../data/tablink';
 import Tab from '../../components/tab';
 
 export default function Login() {
   const date = new Date().toISOString();
+  const { asPath } = useRouter();
   return (
     <div className="ccontainer">
       <div className="left-outer" />
@@ -28,7 +31,7 @@ export default function Login() {
         </div>
         <div className="right-grid">
           <p className="right-grid-date mb-5">Today {date}</p>
-          <Tab />
+          <Tab routes={tablink.linkAuth} active={asPath} />
           <form>
             <div className="form-container mt-5">
               <h3 className="form-heading mb-1">Create New Account</h3>

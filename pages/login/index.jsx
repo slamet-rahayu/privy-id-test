@@ -1,5 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import { useRouter } from 'next/router';
+import tablink from '../../data/tablink';
 import Tab from '../../components/tab';
 import useLogin from '../../hooks/login';
 import Alert from '../../components/alert';
@@ -7,6 +9,7 @@ import Alert from '../../components/alert';
 export default function Login() {
   const date = new Date().toISOString();
   const { register, errors, submit, isLoading } = useLogin();
+  const { asPath } = useRouter();
   return (
     <div className="ccontainer">
       <div className="left-outer" />
@@ -33,7 +36,7 @@ export default function Login() {
         </div>
         <div className="right-grid">
           <p className="right-grid-date mb-5">Today {date}</p>
-          <Tab />
+          <Tab routes={tablink.linkAuth} active={asPath} />
           <form onSubmit={submit}>
             <div className="form-container mt-5">
               <h3 className="form-heading mb-4 pb-3">Login Account</h3>
