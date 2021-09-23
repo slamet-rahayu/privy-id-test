@@ -5,9 +5,9 @@ import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
 import alertContext from '../context/alert';
 import regexvar from '../util/regex-var';
-import authService from '../services/auth';
+import registerService from '../services/register';
 
-function useLogin() {
+function useRegister() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { showAlert } = useContext(alertContext.AlertContext);
@@ -16,9 +16,7 @@ function useLogin() {
     phone: Yup.string()
       .required('Phone number is required')
       .matches(regexvar.phoneRegexpId, 'Please input a valid phone number'),
-    password: Yup.string()
-      .required('Password is required')
-      .min(8, 'Please Input at least 8 character'),
+    password: Yup.string().required('Password is required'),
   });
 
   const formOptions = { resolver: yupResolver(validationSchema) };
@@ -32,15 +30,25 @@ function useLogin() {
   async function onSubmit(data, events) {
     try {
       setIsLoading(true);
-      const user = await authService.login(data.phone, data.password);
-      localStorage.setItem('user', JSON.stringify(user.data));
-      router.push('/information/form');
+      const registered = await registerService.register({
+        phone: data.phone,
+        password: data.password,
+        country: 'Indonesia',
+        latlong: '0',
+        device_token: '0',
+        device_type: 2,
+      });
+      sessionStorage.setItem(
+        'user-id',
+        JSON.stringify(registered.data.user.id)
+      );
+      router.push('/otp-verify');
     } catch (error) {
       if (error.message.includes('422')) {
         showAlert({
           alertType: 'error',
           autoHide: true,
-          alertMessage: 'Incorrect username or password!',
+          alertMessage: 'Phone has already been taken!',
         });
       } else {
         showAlert({
@@ -59,4 +67,4 @@ function useLogin() {
   return { register, errors, submit, isLoading };
 }
 
-export default useLogin;
+export default useRegister;

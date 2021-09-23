@@ -1,7 +1,10 @@
 import React from 'react';
+import { useRouter } from 'next/router';
+import tablink from '../../../data/tablink';
 import Tab from '../../../components/tab';
 
 export default function InfromationForm() {
+  const { pathname } = useRouter();
   return (
     <div className="ccontainer">
       <div className="left-outer" />
@@ -29,7 +32,7 @@ export default function InfromationForm() {
           <div className="form-profile-card">
             <h1 className="profile-name mb-2">Wong Fei Hung</h1>
             <p className="profile-id mb-5 pb-3">Level 1 - #SG769891</p>
-            <Tab />
+            <Tab routes={tablink.linkProfile} active={pathname} />
             <form>
               <div className="form-container mt-5">
                 <h3 className="form-heading">Personal Information</h3>

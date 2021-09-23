@@ -1,8 +1,11 @@
 import React from 'react';
+import { useRouter } from 'next/router';
+import tablink from '../../data/tablink';
 import Tab from '../../components/tab';
 
 export default function Login() {
   const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const { asPath } = useRouter();
   return (
     <div className="ccontainer">
       <div className="left-outer" />
@@ -30,7 +33,7 @@ export default function Login() {
           <div className="form-profile-card">
             <h1 className="profile-name mb-2">Wong Fei Hung</h1>
             <p className="profile-id mb-5 pb-3">Level 1 - #SG769891</p>
-            <Tab />
+            <Tab routes={tablink.linkProfile} active={asPath} />
             <form>
               <div className="form-container mt-5">
                 <h3 className="form-heading">Gallery</h3>

@@ -6,6 +6,14 @@ function getUser() {
   return null;
 }
 
-const userServices = { getUser };
+function getTempUser() {
+  const user = JSON.parse(sessionStorage.getItem('user-id'));
+  if (user) {
+    return user;
+  }
+  return null;
+}
+
+const userServices = { getUser, getTempUser };
 
 export default userServices;

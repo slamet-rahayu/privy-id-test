@@ -1,10 +1,15 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { useRouter } from 'next/router';
-import tablink from '../../data/tablink';
-import Tab from '../../components/tab';
+import tablink from 'data/tablink';
+import Tab from 'components/tab';
+import Alert from 'components/alert';
+import useRegister from 'hooks/register';
+import TodayDate from 'components/today-date';
+import ErrorFeedback from 'components/errorfeedback';
 
 export default function Login() {
-  const date = new Date().toISOString();
+  const { register, errors, submit, isLoading } = useRegister();
   const { asPath } = useRouter();
   return (
     <div className="ccontainer">
@@ -27,12 +32,13 @@ export default function Login() {
               is a secure platform that makes it easy to buy, sell, and store
               cryptocurrency like Bitcoin, Ethereum, and more. Based in the USA
             </p>
+            <Alert />
           </div>
         </div>
         <div className="right-grid">
-          <p className="right-grid-date mb-5">Today {date}</p>
+          <TodayDate />
           <Tab routes={tablink.linkAuth} active={asPath} />
-          <form>
+          <form onSubmit={submit}>
             <div className="form-container mt-5">
               <h3 className="form-heading mb-1">Create New Account</h3>
               <p className="form-sub mb-4 pb-3">
@@ -41,17 +47,42 @@ export default function Login() {
               <h3 className="form-heading mt-1 mb-2">Account Detail</h3>
               <div className="form-group mb-4">
                 <div className="input-label mb-2">Select Country</div>
-                <select name="country" className="input-select">
+                <select
+                  name="country"
+                  className="input-select"
+                  defaultValue="Indonesia"
+                >
                   <option>Indonesia (+62)</option>
                 </select>
               </div>
               <div className="form-group mb-4">
                 <div className="input-label mb-2">Phone Number</div>
-                <input className="input-text" type="text" name="phone" />
+                <input
+                  className={`input-text ${
+                    errors.phone ? 'input-invalid' : ''
+                  }`}
+                  type="text"
+                  name="phone"
+                  {...register('phone')}
+                />
+                {errors.phone && (
+                  <ErrorFeedback message={errors.phone.message} />
+                )}
               </div>
               <div className="form-group">
                 <div className="input-label mb-2">Password</div>
-                <input className="input-text" type="password" name="password" />
+                <input
+                  className={`input-text ${
+                    errors.password ? 'input-invalid' : ''
+                  }`}
+                  type="password"
+                  name="password"
+                  autoComplete="password"
+                  {...register('password')}
+                />
+                {errors.password && (
+                  <ErrorFeedback message={errors.password.message} />
+                )}
               </div>
             </div>
             <div className="form-link-container my-4 py-2">
@@ -69,7 +100,7 @@ export default function Login() {
                 Reset
               </button>
               <button type="submit" className="btn">
-                Register
+                Register {isLoading && <i className="fa fa-spin fa-spinner" />}
               </button>
             </div>
           </form>

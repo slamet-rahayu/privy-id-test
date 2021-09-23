@@ -1,13 +1,14 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { useRouter } from 'next/router';
-import tablink from '../../data/tablink';
-import Tab from '../../components/tab';
-import useLogin from '../../hooks/login';
-import Alert from '../../components/alert';
+import TodayDate from 'components/today-date';
+import tablink from 'data/tablink';
+import Tab from 'components/tab';
+import useLogin from 'hooks/login';
+import Alert from 'components/alert';
+import ErrorFeedback from 'components/errorfeedback';
 
 export default function Login() {
-  const date = new Date().toISOString();
   const { register, errors, submit, isLoading } = useLogin();
   const { asPath } = useRouter();
   return (
@@ -35,7 +36,7 @@ export default function Login() {
           </div>
         </div>
         <div className="right-grid">
-          <p className="right-grid-date mb-5">Today {date}</p>
+          <TodayDate />
           <Tab routes={tablink.linkAuth} active={asPath} />
           <form onSubmit={submit}>
             <div className="form-container mt-5">
@@ -43,23 +44,30 @@ export default function Login() {
               <div className="form-group mb-4">
                 <div className="input-label mb-2">Phone Number</div>
                 <input
-                  className="input-text"
+                  className={`input-text ${
+                    errors.phone ? 'input-invalid' : ''
+                  }`}
                   type="text"
                   name="phone"
                   {...register('phone')}
                 />
                 {errors.phone && (
-                  <p style={{ color: 'red' }}>{errors.phone.message}</p>
+                  <ErrorFeedback message={errors.phone.message} />
                 )}
               </div>
               <div className="form-group">
                 <div className="input-label mb-2">Password</div>
                 <input
-                  className="input-text"
+                  className={`input-text ${
+                    errors.password ? 'input-invalid' : ''
+                  }`}
                   type="password"
                   name="password"
                   {...register('password')}
                 />
+                {errors.password && (
+                  <ErrorFeedback message={errors.password.message} />
+                )}
               </div>
             </div>
             <div className="btn-form-container mt-5 pt-5">

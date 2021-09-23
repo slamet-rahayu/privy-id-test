@@ -7,10 +7,10 @@ export default function Tab({ routes, active }) {
     <div className="tab-container">
       {routes.map((v) => {
         return (
-          <Link href={v.route}>
+          <Link href={v.route} key={v.route}>
             <div
               className={`tab-btn ${
-                v.route === active ? 'tab-btn-active' : ''
+                active.includes(v.route) ? 'tab-btn-active' : ''
               } p-2 mr-4`}
             >
               {v.name}
@@ -24,5 +24,5 @@ export default function Tab({ routes, active }) {
 
 Tab.propTypes = {
   routes: PropTypes.instanceOf(Array).isRequired,
-  active: PropTypes.bool.isRequired,
+  active: PropTypes.string.isRequired,
 };

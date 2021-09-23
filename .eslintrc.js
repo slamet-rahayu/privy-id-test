@@ -36,9 +36,11 @@ module.exports = {
       alias: {
         map: [
           ['components', './components'],
-          ['partials', './partials'],
-          ['backend-util', './backend-util'],
+          ['context', './context'],
+          ['data', './data'],
+          ['hooks', './hooks'],
           ['services', './services'],
+          ['styles', './styles'],
           ['util', './util'],
         ],
         extensions: ['.js', '.jsx'],

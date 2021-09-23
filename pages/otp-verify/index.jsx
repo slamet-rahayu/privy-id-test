@@ -1,4 +1,6 @@
+/* eslint-disable jsx-a11y/tabindex-no-positive */
 import React from 'react';
+import Alert from '../../components/alert';
 
 export default function Login() {
   const date = new Date().toISOString();
@@ -23,19 +25,7 @@ export default function Login() {
               is a secure platform that makes it easy to buy, sell, and store
               cryptocurrency like Bitcoin, Ethereum, and more. Based in the USA
             </p>
-            <div className="alert-warning mt-3">
-              <img
-                src="/exclamation.png"
-                alt="exclamation-logo"
-                width="20"
-                height="20"
-                className="mr-3"
-              />
-              <p className="alert-text">We sent OTP to 0871****921</p>
-              <button type="button" className="alert-btn-close">
-                <img src="/times.png" alt="times" width="14" height="14" />
-              </button>
-            </div>
+            <Alert />
           </div>
         </div>
         <div className="right-grid">
@@ -52,12 +42,14 @@ export default function Login() {
                   type="text"
                   name="otp-1"
                   maxLength="1"
+                  tabIndex="1"
                 />
                 <input
                   className="input-otp"
                   type="text"
                   name="otp-2"
                   maxLength="1"
+                  tabIndex="2"
                 />
                 <input
                   className="input-otp"

@@ -14,7 +14,7 @@ import '../styles/styles.scss';
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const path = router.asPath.split('?')[0];
-  const publicPath = ['/login', '/register'];
+  const publicPath = ['/login', '/register', '/otp-verify'];
   useEffect(() => {
     const user = userServices.getUser();
     if (!user && !publicPath.includes(path)) {
