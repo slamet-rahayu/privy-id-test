@@ -27,7 +27,7 @@ function useRegister() {
     formState: { errors },
   } = useForm(formOptions);
 
-  async function onSubmit(data, events) {
+  async function onSubmit(data) {
     try {
       setIsLoading(true);
       const registered = await registerService.register({
@@ -39,10 +39,13 @@ function useRegister() {
         device_type: 2,
       });
       sessionStorage.setItem(
-        'user-id',
-        JSON.stringify(registered.data.user.id)
+        'user',
+        JSON.stringify({
+          id: registered.data.user.id,
+          phone: registered.data.user.phone,
+        })
       );
-      router.push('/otp-verify');
+      router.replace('/otp-verify');
     } catch (error) {
       if (error.message.includes('422')) {
         showAlert({

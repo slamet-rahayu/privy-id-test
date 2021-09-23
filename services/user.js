@@ -7,7 +7,7 @@ function getUser() {
 }
 
 function getTempUser() {
-  const user = JSON.parse(sessionStorage.getItem('user-id'));
+  const user = JSON.parse(sessionStorage.getItem('user'));
   if (user) {
     return user;
   }

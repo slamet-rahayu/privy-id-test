@@ -3,9 +3,10 @@ import { useRouter } from 'next/router';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import * as Yup from 'yup';
-import alertContext from '../context/alert';
-import regexvar from '../util/regex-var';
-import authService from '../services/auth';
+import alertContext from 'context/alert';
+import regexvar from 'util/regex-var';
+import authServices from 'services/auth';
+import registerService from 'services/register';
 
 function useLogin() {
   const [isLoading, setIsLoading] = useState(false);
@@ -29,25 +30,43 @@ function useLogin() {
     formState: { errors },
   } = useForm(formOptions);
 
-  async function onSubmit(data, events) {
+  const commonError = {
+    alertType: 'error',
+    autoHide: true,
+    alertMessage: 'Something went wrong!',
+  };
+
+  const authError = {
+    alertType: 'error',
+    autoHide: true,
+    alertMessage: 'Incorrect username or password!',
+  };
+
+  async function onSubmit(data) {
     try {
       setIsLoading(true);
-      const user = await authService.login(data.phone, data.password);
+      const user = await authServices.login(data.phone, data.password);
       localStorage.setItem('user', JSON.stringify(user.data));
       router.push('/information/form');
     } catch (error) {
       if (error.message.includes('422')) {
-        showAlert({
-          alertType: 'error',
-          autoHide: true,
-          alertMessage: 'Incorrect username or password!',
-        });
+        showAlert(authError);
+      } else if (error.message.includes('401')) {
+        try {
+          const user = await registerService.otpRequest(data.phone);
+          sessionStorage.setItem(
+            'user',
+            JSON.stringify({
+              id: user.data.user.id,
+              phone: user.data.user.phone,
+            })
+          );
+          router.replace('/otp-verify');
+        } catch (err) {
+          showAlert(commonError);
+        }
       } else {
-        showAlert({
-          alertType: 'error',
-          autoHide: true,
-          alertMessage: 'Internal Server Error!',
-        });
+        showAlert(commonError);
       }
     } finally {
       setIsLoading(false);

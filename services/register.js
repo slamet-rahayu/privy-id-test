@@ -21,11 +21,11 @@ async function otpRequest(phone = '') {
   }
 }
 
-async function otpMatch(user_id = '', phone = '') {
+async function otpMatch(user_id = '', otp_code = '') {
   try {
     const { data } = await axios.post(`${baseApi}/otp/match`, {
       user_id,
-      phone,
+      otp_code,
     });
     return data;
   } catch (error) {

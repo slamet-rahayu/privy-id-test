@@ -1,9 +1,13 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable jsx-a11y/no-autofocus */
 /* eslint-disable jsx-a11y/tabindex-no-positive */
 import React from 'react';
-import Alert from '../../components/alert';
+import Alert from 'components/alert';
+import useOtpVerify from 'hooks/otp-verify';
+import TodayDate from 'components/today-date';
 
 export default function Login() {
-  const date = new Date().toISOString();
+  const { inputFocus, register, submit, errors } = useOtpVerify();
   return (
     <div className="ccontainer">
       <div className="left-outer" />
@@ -29,8 +33,8 @@ export default function Login() {
           </div>
         </div>
         <div className="right-grid">
-          <p className="right-grid-date mb-5">Today {date}</p>
-          <form>
+          <TodayDate />
+          <form onSubmit={submit}>
             <div className="form-container mt-5">
               <h3 className="form-heading mb-1">OTP Verification</h3>
               <p className="form-sub mb-3 pb-3">
@@ -38,30 +42,41 @@ export default function Login() {
               </p>
               <div className="form-otp mb-4">
                 <input
-                  className="input-otp"
+                  className={`input-otp ${errors.otp1 ? 'input-invalid' : ''}`}
                   type="text"
-                  name="otp-1"
+                  name="otp1"
                   maxLength="1"
                   tabIndex="1"
+                  autoFocus
+                  onKeyUp={inputFocus}
+                  {...register('otp1')}
                 />
                 <input
-                  className="input-otp"
+                  className={`input-otp ${errors.otp1 ? 'input-invalid' : ''}`}
                   type="text"
-                  name="otp-2"
+                  name="otp2"
                   maxLength="1"
                   tabIndex="2"
+                  onKeyUp={inputFocus}
+                  {...register('otp2')}
                 />
                 <input
-                  className="input-otp"
+                  className={`input-otp ${errors.otp1 ? 'input-invalid' : ''}`}
                   type="text"
-                  name="otp-3"
+                  name="otp3"
                   maxLength="1"
+                  tabIndex="3"
+                  onKeyUp={inputFocus}
+                  {...register('otp3')}
                 />
                 <input
-                  className="input-otp"
+                  className={`input-otp ${errors.otp1 ? 'input-invalid' : ''}`}
                   type="text"
-                  name="otp-4"
+                  name="otp4"
                   maxLength="1"
+                  tabIndex="4"
+                  onKeyUp={inputFocus}
+                  {...register('otp4')}
                 />
                 <button type="submit" className="btn-contained">
                   Verify
