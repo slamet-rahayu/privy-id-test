@@ -62,7 +62,6 @@ export default function Login() {
                     errors.phone ? 'input-invalid' : ''
                   }`}
                   type="text"
-                  name="phone"
                   {...register('phone')}
                 />
                 {errors.phone && (
@@ -76,7 +75,6 @@ export default function Login() {
                     errors.password ? 'input-invalid' : ''
                   }`}
                   type="password"
-                  name="password"
                   autoComplete="password"
                   {...register('password')}
                 />
@@ -99,7 +97,7 @@ export default function Login() {
               <button type="button" className="btn btn-outlined mr-3">
                 Reset
               </button>
-              <button type="submit" className="btn">
+              <button type="submit" className="btn-contained">
                 Register {isLoading && <i className="fa fa-spin fa-spinner" />}
               </button>
             </div>

@@ -19,7 +19,7 @@ function AlertProvider({ children }) {
   };
 
   const hideAlert = () => {
-    showAlert(false);
+    setVisible(false);
     setType(null);
     setMessage(null);
     setHide(false);

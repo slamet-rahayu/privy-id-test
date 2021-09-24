@@ -12,15 +12,15 @@ const linkAuth = [
 const linkProfile = [
   {
     name: 'Information',
-    route: '/information',
+    route: '/information/form',
   },
   {
     name: 'Career',
-    route: '/career',
+    route: '/careers/form',
   },
   {
     name: 'Education',
-    route: '/education',
+    route: '/education/form',
   },
   {
     name: 'Gallery',

@@ -46,8 +46,8 @@ function useLogin() {
     try {
       setIsLoading(true);
       const user = await authServices.login(data.phone, data.password);
-      localStorage.setItem('user', JSON.stringify(user.data));
-      router.push('/information/form');
+      localStorage.setItem('user', user.data.user.access_token);
+      router.replace('/information/form');
     } catch (error) {
       if (error.message.includes('422')) {
         showAlert(authError);

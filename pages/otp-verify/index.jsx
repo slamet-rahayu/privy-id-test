@@ -7,7 +7,8 @@ import useOtpVerify from 'hooks/otp-verify';
 import TodayDate from 'components/today-date';
 
 export default function Login() {
-  const { inputFocus, register, submit, errors } = useOtpVerify();
+  const { inputFocus, register, submit, errors, resendOtp, seconds } =
+    useOtpVerify();
   return (
     <div className="ccontainer">
       <div className="left-outer" />
@@ -44,7 +45,6 @@ export default function Login() {
                 <input
                   className={`input-otp ${errors.otp1 ? 'input-invalid' : ''}`}
                   type="text"
-                  name="otp1"
                   maxLength="1"
                   tabIndex="1"
                   autoFocus
@@ -54,7 +54,6 @@ export default function Login() {
                 <input
                   className={`input-otp ${errors.otp1 ? 'input-invalid' : ''}`}
                   type="text"
-                  name="otp2"
                   maxLength="1"
                   tabIndex="2"
                   onKeyUp={inputFocus}
@@ -63,7 +62,6 @@ export default function Login() {
                 <input
                   className={`input-otp ${errors.otp1 ? 'input-invalid' : ''}`}
                   type="text"
-                  name="otp3"
                   maxLength="1"
                   tabIndex="3"
                   onKeyUp={inputFocus}
@@ -72,7 +70,6 @@ export default function Login() {
                 <input
                   className={`input-otp ${errors.otp1 ? 'input-invalid' : ''}`}
                   type="text"
-                  name="otp4"
                   maxLength="1"
                   tabIndex="4"
                   onKeyUp={inputFocus}
@@ -89,9 +86,17 @@ export default function Login() {
                 alt="reverse"
                 width="20"
                 height="20"
-                className="mr-2"
+                className={`mr-2 ${seconds > 0 ? 'icon-resend-disabled' : ''}`}
               />
-              <p className="form-link">Resend OTP Code</p>
+              <button
+                type="button"
+                className="form-link"
+                disabled={seconds > 0}
+                onClick={resendOtp}
+              >
+                Resend OTP Code
+              </button>
+              {seconds > 0 && <p className="timer">{seconds}</p>}
             </div>
           </form>
         </div>

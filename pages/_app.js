@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }) {
   const path = router.asPath.split('?')[0];
   const publicPath = ['/login', '/register', '/otp-verify'];
   useEffect(() => {
-    const user = userServices.getUser();
+    const user = localStorage.getItem('user');
     if (!user && !publicPath.includes(path)) {
       router.replace('/login');
     } else if (user && publicPath.includes(path)) {
