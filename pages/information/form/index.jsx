@@ -39,7 +39,6 @@ export default function InfromationForm() {
                 <p className="form-sub  mb-4 pb-3">Your personal data</p>
                 <div className="form-grid">
                   <div className="form-left pr-4">
-                    <div className="form-heading mb-3 pb-3">Product detail</div>
                     <div className="form-group mb-4">
                       <div className="input-label mb-2">
                         Name <sup>*</sup>
@@ -106,7 +105,7 @@ export default function InfromationForm() {
                 <button type="button" className="btn-outlined mr-3">
                   Discard
                 </button>
-                <button type="submit" className="btn">
+                <button type="submit" className="btn-contained">
                   Update
                 </button>
               </div>

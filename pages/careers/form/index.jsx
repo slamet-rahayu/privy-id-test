@@ -7,7 +7,7 @@ import useCareersForm from 'hooks/careers-form';
 import ErrorFeedback from 'components/errorfeedback';
 import Alert from 'components/alert';
 
-export default function Login() {
+export default function CareersForm() {
   const { pathname } = useRouter();
   const { register, errors, submit, isLoading } = useCareersForm();
   return (
@@ -103,7 +103,7 @@ export default function Login() {
                       Discard
                     </button>
                     <button type="submit" className="btn-contained">
-                      Add Career{' '}
+                      Update Career{' '}
                       {isLoading && <i className="fa fa-spin fa-spinner" />}
                     </button>
                   </div>

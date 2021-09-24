@@ -6,16 +6,14 @@ import alertContext from 'context/alert';
 import userServices from 'services/user';
 import profileServices from 'services/profile';
 
-function useCareersForm() {
+function useEducationForm() {
   const [isLoading, setIsLoading] = useState(false);
   const { showAlert } = useContext(alertContext.AlertContext);
   const { user } = userServices.useGetUser();
 
   const validationSchema = Yup.object().shape({
-    position: Yup.string().required('This field is required'),
-    company_name: Yup.string().required('This field is required'),
-    starting_from: Yup.string().required('This field is required'),
-    ending_in: Yup.string().required('This field is required'),
+    school_name: Yup.string().required('This field is required'),
+    graduation_time: Yup.string().required('This field is required'),
   });
 
   const formOptions = { resolver: yupResolver(validationSchema) };
@@ -29,10 +27,11 @@ function useCareersForm() {
   async function onSubmit(data) {
     try {
       setIsLoading(true);
-      await profileServices.career(data, user);
+      await profileServices.education(data, user);
       showAlert({
         alertType: 'success',
-        alertMessage: 'Career updated!',
+        autoHide: true,
+        alertMessage: 'Education Updated!',
       });
     } catch (error) {
       showAlert({
@@ -50,4 +49,4 @@ function useCareersForm() {
   return { register, errors, submit, isLoading };
 }
 
-export default useCareersForm;
+export default useEducationForm;

@@ -1,10 +1,15 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { useRouter } from 'next/router';
-import tablink from '../../../data/tablink';
-import Tab from '../../../components/tab';
+import tablink from 'data/tablink';
+import Tab from 'components/tab';
+import Alert from 'components/alert';
+import useEducationForm from 'hooks/education-form';
+import ErrorFeedback from 'components/errorfeedback';
 
-export default function Login() {
-  const { pathname } = useRouter;
+export default function EducationForm() {
+  const { pathname } = useRouter();
+  const { register, errors, submit, isLoading } = useEducationForm();
   return (
     <div className="ccontainer">
       <div className="left-outer" />
@@ -26,6 +31,7 @@ export default function Login() {
               is a secure platform that makes it easy to buy, sell, and store
               cryptocurrency like Bitcoin, Ethereum, and more. Based in the USA
             </p>
+            <Alert />
           </div>
         </div>
         <div className="right-grid">
@@ -33,7 +39,7 @@ export default function Login() {
             <h1 className="profile-name mb-2">Wong Fei Hung</h1>
             <p className="profile-id mb-5 pb-3">Level 1 - #SG769891</p>
             <Tab routes={tablink.linkProfile} active={pathname} />
-            <form>
+            <form onSubmit={submit}>
               <div className="form-container mt-5">
                 <h3 className="form-heading">Education Information</h3>
                 <p className="form-sub mb-4 pb-3">
@@ -42,32 +48,39 @@ export default function Login() {
                 <div>
                   <div className="form-group mb-4">
                     <div className="input-label mb-2">School Name</div>
-                    <input className="input-text" type="text" name="company" />
+                    <input
+                      className={`input-text ${
+                        errors.school_name ? 'input-invalid' : ''
+                      }`}
+                      type="text"
+                      {...register('school_name')}
+                    />
+                    {errors.school_name && (
+                      <ErrorFeedback message={errors.school_name.message} />
+                    )}
                   </div>
                   <div className="form-group mb-4">
                     <div className="input-label mb-2">Graduation Time</div>
                     <input
-                      className="input-date"
+                      className={`input-text ${
+                        errors.graduation_time ? 'input-invalid' : ''
+                      }`}
                       type="date"
-                      name="dateofbirth"
+                      {...register('graduation_time')}
                     />
+                    {errors.graduation_time && (
+                      <ErrorFeedback message={errors.graduation_time.message} />
+                    )}
                   </div>
-                  <div className="btn-form-container mt-1 pt-1 mb-5 pb-5">
+                  <div className="btn-form-container mt-1 pt-1">
                     <button type="button" className="btn-outlined mr-3">
                       Discard
                     </button>
-                    <button type="submit" className="btn">
-                      Add Education
+                    <button type="submit" className="btn btn-contained">
+                      Update Education{' '}
+                      {isLoading && <i className="fa fa-spin fa-spinner" />}
                     </button>
                   </div>
-                </div>
-                <div className="my-4">
-                  <h3 className="career-company">PT Erkananta</h3>
-                  <p className="career-time">Jul 7, 2020 - Jul 7, 2021</p>
-                </div>
-                <div className="my-4">
-                  <h3 className="career-company">PT Erkananta</h3>
-                  <p className="career-time">Jul 7, 2020 - Jul 7, 2021</p>
                 </div>
               </div>
             </form>
