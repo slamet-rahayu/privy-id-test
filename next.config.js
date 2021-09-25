@@ -1,3 +1,5 @@
+const dev = process.env.NODE_ENV === 'development';
+
 module.exports = {
   reactStrictMode: true,
   eslint: {
@@ -6,9 +8,6 @@ module.exports = {
     ignoreDuringBuilds: true,
   },
   publicRuntimeConfig: {
-    apiUrl: '/api/api/v1',
-  },
-  serverRuntimeConfig: {
-    apiUrl: 'http://pretest-qa.dcidev.id/api/v1',
+    apiUrl: dev ? '/api/api/v1' : 'http://pretest-qa.dcidev.id/api/v1',
   },
 };

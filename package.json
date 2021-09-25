@@ -4,9 +4,9 @@
   "private": true,
   "proxy": "https://pretest-qa.dcidev.id",
   "scripts": {
-    "dev": "node server",
-    "build": "next build",
-    "start": "cross-env NODE_ENV=production node server",
+    "dev": "cross-env NODE_ENV=development node server",
+    "build": "cross-env NODE_ENV=production next build",
+    "start": "cross-env NODE_ENV=production next start",
     "lint": "next lint"
   },
   "dependencies": {

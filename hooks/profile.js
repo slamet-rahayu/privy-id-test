@@ -6,14 +6,17 @@ import alertContext from 'context/alert';
 import userServices from 'services/user';
 import profileServices from 'services/profile';
 
-function useEducationForm() {
+function useProfileForm() {
   const [isLoading, setIsLoading] = useState(false);
   const { showAlert } = useContext(alertContext.AlertContext);
   const { user } = userServices.useGetUser();
 
   const validationSchema = Yup.object().shape({
-    school_name: Yup.string().required('This field is required'),
-    graduation_time: Yup.string().required('This field is required'),
+    name: Yup.string().required('This field is required'),
+    gender: Yup.string().required('This field is required'),
+    birthday: Yup.string().required('This field is required'),
+    hometown: Yup.string().required('This field is required'),
+    bio: Yup.string().required('This field is required'),
   });
 
   const formOptions = { resolver: yupResolver(validationSchema) };
@@ -27,15 +30,15 @@ function useEducationForm() {
   async function onSubmit(data, events) {
     try {
       setIsLoading(true);
-      await profileServices.education(data, user);
+      await profileServices.update(data, user);
       showAlert({
         alertType: 'success',
         autoHide: true,
-        alertMessage: 'Education Updated!',
+        alertMessage: 'Profile Updated!',
       });
     } catch (error) {
       showAlert({
-        alertType: 'error',
+        alerType: 'error',
         autoHide: true,
         alertMessage: 'Something went wrong!',
       });
@@ -50,4 +53,4 @@ function useEducationForm() {
   return { register, errors, submit, isLoading };
 }
 
-export default useEducationForm;
+export default useProfileForm;

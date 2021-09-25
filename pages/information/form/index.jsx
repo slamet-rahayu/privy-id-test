@@ -1,10 +1,15 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { useRouter } from 'next/router';
-import tablink from '../../../data/tablink';
-import Tab from '../../../components/tab';
+import tablink from 'data/tablink';
+import Tab from 'components/tab';
+import Alert from 'components/alert';
+import useProfileForm from 'hooks/profile';
+import ErrorFeedback from 'components/errorfeedback';
 
 export default function InfromationForm() {
   const { pathname } = useRouter();
+  const { isLoading, submit, errors, register } = useProfileForm();
   return (
     <div className="ccontainer">
       <div className="left-outer" />
@@ -26,6 +31,7 @@ export default function InfromationForm() {
               is a secure platform that makes it easy to buy, sell, and store
               cryptocurrency like Bitcoin, Ethereum, and more. Based in the USA
             </p>
+            <Alert />
           </div>
         </div>
         <div className="right-grid">
@@ -33,7 +39,7 @@ export default function InfromationForm() {
             <h1 className="profile-name mb-2">Wong Fei Hung</h1>
             <p className="profile-id mb-5 pb-3">Level 1 - #SG769891</p>
             <Tab routes={tablink.linkProfile} active={pathname} />
-            <form>
+            <form onSubmit={submit}>
               <div className="form-container mt-5">
                 <h3 className="form-heading">Personal Information</h3>
                 <p className="form-sub  mb-4 pb-3">Your personal data</p>
@@ -43,37 +49,58 @@ export default function InfromationForm() {
                       <div className="input-label mb-2">
                         Name <sup>*</sup>
                       </div>
-                      <input className="input-text" type="text" name="Name" />
+                      <input
+                        className={`input-text ${
+                          errors.name ? 'input-invalid' : ''
+                        }`}
+                        type="text"
+                        {...register('name')}
+                      />
+                      {errors.name && (
+                        <ErrorFeedback message={errors.name.message} />
+                      )}
                     </div>
                     <div className="form-group mb-4">
                       <div className="input-label mb-2">Gender</div>
-                      <select name="gender" className="input-select">
-                        <option value="">Male</option>
-                        <option value="">Female</option>
+                      <select
+                        className={`input-select ${
+                          errors.gender ? 'input-invalid' : ''
+                        }`}
+                        {...register('gender')}
+                      >
+                        <option value="">Gender</option>
+                        <option value="0">Male</option>
+                        <option value="1">Female</option>
                       </select>
+                      {errors.gender && (
+                        <ErrorFeedback message={errors.gender.message} />
+                      )}
                     </div>
                     <div className="form-group mb-4">
                       <div className="input-label mb-2">Date of Birth</div>
                       <input
-                        className="input-date"
+                        className={`input-date ${
+                          errors.birthday ? 'input-invalid' : ''
+                        }`}
                         type="date"
-                        name="dateofbirth"
+                        {...register('birthday')}
                       />
-                    </div>
-                    <div className="form-group mb-4">
-                      <div className="input-label mb-2">Wethon</div>
-                      <select name="gender" className="input-select">
-                        <option value="">Aquaman</option>
-                        <option value="">Female</option>
-                      </select>
+                      {errors.birthday && (
+                        <ErrorFeedback message={errors.birthday.message} />
+                      )}
                     </div>
                     <div className="form-group">
                       <div className="input-label mb-2">Bio</div>
                       <textarea
-                        name="bio"
-                        className="input-text-area"
+                        className={`input-text-area ${
+                          errors.bio ? 'input-invalid' : ''
+                        }`}
                         placeholder="write your bio here"
+                        {...register('bio')}
                       />
+                      {errors.bio && (
+                        <ErrorFeedback message={errors.bio.message} />
+                      )}
                     </div>
                   </div>
                   <div className="form-right pl-4">
@@ -93,20 +120,25 @@ export default function InfromationForm() {
                     <div className="form-group">
                       <div className="input-label mb-2">Address</div>
                       <textarea
-                        name="bio"
-                        className="input-text-area"
+                        className={`input-text-area ${
+                          errors.hometown ? 'input-invalid' : ''
+                        }`}
                         placeholder="write your bio here"
+                        {...register('hometown')}
                       />
+                      {errors.hometown && (
+                        <ErrorFeedback message={errors.hometown.message} />
+                      )}
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="btn-form-container mt-5 pt-5">
+              <div className="btn-form-container mt-5">
                 <button type="button" className="btn-outlined mr-3">
                   Discard
                 </button>
                 <button type="submit" className="btn-contained">
-                  Update
+                  Update {isLoading && <i className="fa fa-spin fa-spinner" />}
                 </button>
               </div>
             </form>

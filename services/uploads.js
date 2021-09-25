@@ -3,29 +3,18 @@ import apiUrl from '../util/api-url';
 
 const baseApi = `${apiUrl}/uploads`;
 
-const config = {
-  header: {
-    Authorization: 'token',
+const config = (token) => ({
+  headers: {
+    Authorization: token,
   },
-};
+});
 
-async function uploadCover(image) {
-  try {
-    const { data } = await axios.post(`${baseApi}/cover`, { image }, config);
-    return data;
-  } catch (error) {
-    throw new Error(error.message);
-  }
-}
-
-async function setProfilePic(id) {
+async function uploadCover(image, token) {
   try {
     const { data } = await axios.post(
-      `${baseApi}/profile/default`,
-      {
-        id,
-      },
-      config
+      `${baseApi}/cover`,
+      { image },
+      config(token)
     );
     return data;
   } catch (error) {
@@ -33,18 +22,41 @@ async function setProfilePic(id) {
   }
 }
 
-async function uploadProfilePic(image) {
+async function setProfilePic(id, token) {
   try {
-    const { data } = await axios.post(`${baseApi}/profile`, { image }, config);
+    const { data } = await axios.post(
+      `${baseApi}/profile/default`,
+      {
+        id,
+      },
+      config(token)
+    );
     return data;
   } catch (error) {
     throw new Error(error.message);
   }
 }
 
-async function deleteProfilePic(id) {
+async function uploadProfilePic(image, token) {
   try {
-    const { data } = await axios.delete(`${baseApi}/profile`, { id }, config);
+    const { data } = await axios.post(
+      `${baseApi}/profile`,
+      { image },
+      config(token)
+    );
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+async function deleteProfilePic(id, token) {
+  try {
+    const { data } = await axios.delete(
+      `${baseApi}/profile`,
+      { id },
+      config(token)
+    );
     return data;
   } catch (error) {
     throw new Error(error.message);

@@ -4,7 +4,6 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import 'font-awesome/css/font-awesome.min.css';
-import userServices from '../services/user';
 import alertContext from '../context/alert';
 import '../styles/bootstrap.min.css';
 import '../styles/globals.css';

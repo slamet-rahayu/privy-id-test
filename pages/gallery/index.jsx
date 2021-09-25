@@ -1,11 +1,12 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import tablink from '../../data/tablink';
-import Tab from '../../components/tab';
+import tablink from 'data/tablink';
+import Tab from 'components/tab';
+import useGallery from 'hooks/gallery';
 
 export default function Login() {
-  const data = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const { asPath } = useRouter();
+  const { isLoading, isError, gallery } = useGallery();
   return (
     <div className="ccontainer">
       <div className="left-outer" />
@@ -39,13 +40,19 @@ export default function Login() {
                 <h3 className="form-heading">Gallery</h3>
                 <p className="form-sub mb-4 pb-3">Upload your special moment</p>
                 <div className="gallery-card-container">
-                  {data.map((v) => {
-                    return (
-                      <div key={v} className="gallery-card mb-4">
-                        Hello
-                      </div>
-                    );
-                  })}
+                  {!isLoading &&
+                    !isError &&
+                    gallery.map((v) => {
+                      return (
+                        <div key={v.id} className="gallery-card">
+                          <img
+                            src={v.picture.url}
+                            alt={v.id}
+                            className="gallery-img"
+                          />
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
             </form>

@@ -68,7 +68,7 @@ function useOtpVerify() {
       showAlert({
         alertType: 'error',
         autoHide: true,
-        alertMessage: 'Error something went wrong!',
+        alertMessage: 'Something went wrong!',
       });
     } finally {
       setIsLoading(false);
